@@ -19,4 +19,6 @@ Route::get('/', function () {
 
 
 Route::get('/profesi/dokter',[\App\Http\Controllers\DokterController::class,'dokter']);
-Route::get('/dokter/{id}',[\App\Http\Controllers\DokterController::class,'showdokter']);
+Route::get('/profesi/detail/{id}',[\App\Http\Controllers\DokterController::class,'showdokter']);
+
+Route::get('/rs/rumahsakit', [\App\Http\Controllers\RumahSakitController::class, 'rs']);

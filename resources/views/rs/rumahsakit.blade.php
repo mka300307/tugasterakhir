@@ -18,15 +18,15 @@
         $no = 1;
         ?>
         <tbody>
-        @foreach($dokter as $data)
+        @foreach($rs as $data)
             <tr>
                 <th scope="row"><?= $no++ ?></th>
-                <td>{{$data['name']}}</td>
-                <td>{{$data['spesialis']}}</td>
-                <td>{{$data['alamat']}}</td>
-                <td>{{$data['karir']}}</td>
+                <td>{{$data['nama']}}</td>
+                <td>{{$data['kamar']}}</td>
+                <td>{{$data['kota']}}</td>
+                <td>{{$data['rilis']}}</td>
                 <td>
-                    <a href="/profesi/detail/{{ $data->id }}"><button type="button" class="btn btn-info" ><i class="fa-solid fa-circle-info"></i> Info</button></a>
+                    <a href="/rs/detail/{{ $data->id }}"><button type="button" class="btn btn-info" ><i class="fa-solid fa-circle-info"></i> Info</button></a>
                 </td>
             </tr>
 
