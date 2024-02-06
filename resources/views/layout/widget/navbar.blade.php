@@ -7,8 +7,12 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" href="/profesi/dokter">Dokter</a>
+                <a class="nav-link active" aria-current="page" href="/spesial/all">Spesialis</a>
                 <a class="nav-link" href="/rs/rumahsakit">Barista</a>
+                <a class="nav-link" href="/login">Login</a>
+
             </div>
+
         </div>
     </div>
 </nav>
