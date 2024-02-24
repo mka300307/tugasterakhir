@@ -174,7 +174,7 @@
     <div class="row">
         <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
             <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-                <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+                <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto" style="height: 100vh">
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center gap-2 " href="/dashbord">
@@ -184,7 +184,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 " href="/spesial/all ">
+                            <a class="nav-link d-flex align-items-center gap-2 " href="/spesial/all   ">
                                 <i class="fa-solid fa-user-tie"></i>
                                 Spesialis
                             </a>
@@ -198,15 +198,47 @@
         </div>
 
         <main class="col-md-9  col-lg-10 p-5">
-            <form method="POST" action="/spesial/add">
-                @csrf
-                <div class="mb-3">
-                    <label  class="form-label">Spesialis</label>
-                    <input  class="form-control" id="nama" name="nama" value="{{old('nama,$spesial->nama')}}">
-                </div>
+            <div class="container">
 
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+                @auth
+                    <div class="pb-3">
+                        <a href='{{ url('/dashbord') }}' class="btn btn-danger"> Kembali </a>
+                    </div>
+                @else
+                    <div class="pb-3">
+                        <a href='{{ url('/profesi/dokter') }}' class="btn btn-danger"> Kembali </a>
+                    </div>
+                @endauth
+
+                <h1 class="display-4 mb-4">Detail Dokter</h1>
+
+                    <div class="form-group p-3" data-aos="fade-up">
+                        <label for="kota">NO Register</label>
+                        <input type="text" id="kota" name="kota" value="{{ $dokter->no_registrasi }}" class="form-control" readonly>
+                    </div>
+
+                    <div class="form-group p-3" data-aos="fade-up">
+                        <label for="nama">Nama Dokter</label>
+                        <input type="nama" id="nama" name="nama" value="{{ $dokter->name }}" class="form-control" readonly>
+                    </div>
+
+                    <div class="form-group p-3" data-aos="fade-up">
+                        <label for="umur">Alamat Dokter</label>
+                        <input type="int" id="umur" name="umur" value="{{ $dokter->alamat }}" class="form-control" readonly>
+                    </div>
+
+
+
+                    <div class="form-group p-3" data-aos="fade-up">
+                        <label for="kota">Spesialis</label>
+                        <input type="text" id="kota" name="kota" value="{{ $dokter->spesial->nama}}" class="form-control" readonly>
+                    </div>
+
+                <div class="form-group p-3" data-aos="fade-up">
+                    <label for="lahir">Karir</label>
+                    <input type="date" id="lahir" name="lahir" value="{{ $dokter->karir }}" class="form-control" readonly>
+                </div>
+            </div>
 
         </main>
     </div>

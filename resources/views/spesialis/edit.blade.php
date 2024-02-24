@@ -198,16 +198,14 @@
         </div>
 
         <main class="col-md-9  col-lg-10 p-5">
-            <form method="POST" action="/spesial/add">
-                @csrf
-                <div class="mb-3">
-                    <label  class="form-label">Spesialis</label>
-                    <input  class="form-control" id="nama" name="nama" value="{{old('nama,$spesial->nama')}}">
-                </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-
+                <form method="POST" action="/spesial/update/{{$spesial->id}}">
+                    @csrf
+                    <div class="mb-3">
+                        <label  class="form-label">Spesialis</label>
+                        <input class="form-control"  id="nis" name="nama" value="{{old('nama',$spesial->nama)}}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
         </main>
     </div>
 </div>

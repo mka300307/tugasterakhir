@@ -169,12 +169,11 @@
 
 </header>
 
-
 <div class="container-fluid">
     <div class="row">
         <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
             <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-                <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+                <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto" style="height: 100vh">
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center gap-2 " href="/dashbord">
@@ -184,7 +183,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 " href="/spesial/all ">
+                            <a class="nav-link d-flex align-items-center gap-2 " href="/spesial/all   ">
                                 <i class="fa-solid fa-user-tie"></i>
                                 Spesialis
                             </a>
@@ -198,11 +197,32 @@
         </div>
 
         <main class="col-md-9  col-lg-10 p-5">
-            <form method="POST" action="/spesial/add">
+            <form method="POST" action="/dashbord/add">
                 @csrf
                 <div class="mb-3">
+                    <label  class="form-label">Nama Dokter</label>
+                    <input type="text" class="form-control"  id="name" name="name" value="{{old('name,$dokter->name')}}">
+                </div>
+                <div class="mb-3">
+                    <label  class="form-label">No Registrasi</label>
+                    <input type="number" class="form-control" id="no_registrasi" name="no_registrasi" value="{{old('no_registrasi,$dokter->no_registrasi')}}">
+                </div>
+                <div class="mb-3">
                     <label  class="form-label">Spesialis</label>
-                    <input  class="form-control" id="nama" name="nama" value="{{old('nama,$spesial->nama')}}">
+                    <select class="form-select" name="spesial_id" id="spesial_id">
+                        @foreach($dokter as $item)
+                            <option name="spesial_id" value="{{$item -> id}}">{{ $item->nama }}</option>
+                        @endforeach
+                    </select>
+                    {{--            <!-- <input  class="form-control"  id="kelas" name="kelas" value="{{old('kelas,$dokter->kelas')}}"> -->--}}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Alamat</label>
+                    <input  class="form-control" id="alamat" name="alamat" value="{{old('alamat,$dokter->alamat')}}">
+                </div>
+                <div class="mb-3">
+                    <label  class="form-label">Karir</label>
+                    <input  class="form-control" id="karir" name="karir" type="date" value="{{old('karir,$dokter->karir')}}">
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>

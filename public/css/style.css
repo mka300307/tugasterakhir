@@ -8,6 +8,16 @@ body {
     padding: 1rem;
 }
 
+.txt-color {
+    color: #FF004D;
+}
+
+.bi {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+}
+
 .form-signin .form-floating:focus-within {
     z-index: 2;
 }

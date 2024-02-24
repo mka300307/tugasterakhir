@@ -2,8 +2,6 @@
 
 @section('content')
     <h1>ini adalah halaman dokter</h1>
-    <a href="/profesi/create"><button type="button" class="btn btn-success">Success</button></a>
-
     <table class="table table-striped table-hover table-bordered">
         <thead class="table-dark">
         <tr>
@@ -29,7 +27,15 @@
                 <td>{{$data['alamat']}}</td>
                 <td>{{$data['karir']}}</td>
                 <td>
-                    <a href="/profesi/detail/{{ $data->id }}"><button type="button" class="btn btn-info" ><i class="fa-solid fa-circle-info"></i> Info</button></a>
+{{--                    @auth--}}
+{{--                        <a href="/profesi/detail/{{ $data->id }}"><button type="button" class="btn btn-info" ><i class="fa-solid fa-circle-info"></i> Info</button></a>--}}
+{{--                        <button type="button" class="btn btn-danger">Danger</button>--}}
+{{--                        <button type="button" class="btn btn-warning">Warning</button>--}}
+{{--                    @else--}}
+                        <a href="/profesi/detail/{{ $data->id }}"><button type="button" class="btn btn-info" ><i class="fa-solid fa-circle-info"></i> Info</button></a>
+{{--                    @endauth--}}
+
+
                 </td>
             </tr>
 

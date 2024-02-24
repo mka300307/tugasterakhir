@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\rumahSakit;
+use App\Models\rumahSakiti;
 use Illuminate\Http\Request;
 
 class RumahSakitController extends Controller
@@ -12,7 +12,7 @@ class RumahSakitController extends Controller
         return view('rs.rumahsakit',
         [
             'title' => 'Rumah Sakit',
-            'rs' => rumahSakit::all()
+            'rs' => rumahSakiti::all()
         ]);
     }
 
@@ -21,7 +21,7 @@ class RumahSakitController extends Controller
         return view('rs.detail',
         [
             'title' => 'Detail Rumah Sakit',
-            'rs' => rumahSakit::findOrFail($id)
+            'rs' => rumahSakiti::findOrFail($id)
         ]);
     }
 }

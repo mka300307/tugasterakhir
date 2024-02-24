@@ -2,9 +2,17 @@
 
 @section('content')
     <div class="container">
-        <div class="pb-3">
-            <a href='{{ url('/profesi/dokter') }}' class="btn btn-danger"> Kembali </a>
-        </div>
+
+        @auth
+            <div class="pb-3">
+                <a href='{{ url('/dashbord') }}' class="btn btn-danger"> Kembali </a>
+            </div>
+        @else
+            <div class="pb-3">
+                <a href='{{ url('/profesi/dokter') }}' class="btn btn-danger"> Kembali </a>
+            </div>
+        @endauth
+
         <h1 class="display-4 mb-4">Detail Dokter</h1>
 
         <div class="form-group p-3" data-aos="fade-up">

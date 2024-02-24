@@ -172,9 +172,9 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+        <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary ">
             <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-                <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+                <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto" style="height: 100vh">
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center gap-2 " href="/dashbord">
@@ -184,7 +184,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 " href="/spesial/all ">
+                            <a class="nav-link d-flex align-items-center gap-2 " href="/spesial/all   ">
                                 <i class="fa-solid fa-user-tie"></i>
                                 Spesialis
                             </a>
@@ -198,19 +198,101 @@
         </div>
 
         <main class="col-md-9  col-lg-10 p-5">
-            <form method="POST" action="/spesial/add">
-                @csrf
-                <div class="mb-3">
-                    <label  class="form-label">Spesialis</label>
-                    <input  class="form-control" id="nama" name="nama" value="{{old('nama,$spesial->nama')}}">
-                </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label for="data_filter">Filter by spesialis:</label>
+                    <form method="GET" action="{{ url('/dashbord/filter') }}">
+                        <div class="input-group">
+                            <select class="form-select" name="spesial_id">
+                                <option>Semua Data</option>
+                                @foreach($filter as $item)
+                                    <option value="{{$item->id}}">{{$item->nama}}</option>
+                                @endforeach
+                            </select>
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+
+
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="table-dark">
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">No Register</th>
+                    <th scope="col">Spesialis</th>
+{{--                    <th scope="col">Alamat</th>--}}
+                    <th scope="col">Karir</th>
+                    <th scope="col">Aksi</th>
+                </tr>
+                </thead>
+                <?php
+                $no = 1;
+                ?>
+                <tbody>
+                @foreach($dokter as $data)
+                    <tr>
+                        <th scope="row"><?= $no++ ?></th>
+                        <td>{{$data['name']}}</td>
+                        <td>{{$data['no_registrasi']}}</td>
+                        <td>{{$data->spesial->nama}}</td>
+{{--                        <td>{{$data['alamat']}}</td>--}}
+                        <td>{{$data['karir']}}</td>
+                        <td>
+                            @auth
+                                <a href="/dashbord/detail/{{ $data->id }}"><button type="button" class="btn btn-info" ><i class="fa-solid fa-circle-info"></i> Info</button></a>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{ $data->id }}">
+                                    Hapus
+                                </button>
+                                <a href="/dashbord/edit/{{ $data->id }}"><button type="button" class="btn btn-warning">Edit</button></a>
+                            @else
+                                <a href="/profesi/detail/{{ $data->id }}"><button type="button" class="btn btn-info" ><i class="fa-solid fa-circle-info"></i> Info</button></a>
+                            @endauth
+
+
+                        </td>
+
+                        <div class="modal fade" id="delete{{ $data->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Yakin ingin menghapus Dokter {{ $data->name }}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <form action="{{ url('/dashbord/hapus/' . $data->id) }}" method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </tr>
+
+                </tbody>
+                @endforeach
+            </table>
+            {{ $dokter->links() }}
+
+            <a href="/dashbord/create"><button type="button" class="btn btn-success mt-5">Add New Dokter</button></a>
+
 
         </main>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://dn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script><script src="dashboard.js"></script></body>

@@ -76,7 +76,7 @@ class DokterController extends Controller
 
         $kelas= Dokter::findOrFail($id);
         $kelas->update($validatedData);
-        return redirect('profesi/dokter')->with('update', 'Data Anda berhasil diupdate');
+        return redirect('dashbord')->with('update', 'Data Anda berhasil diupdate');
     }
 
     /**

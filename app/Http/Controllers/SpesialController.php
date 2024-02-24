@@ -52,7 +52,7 @@ class SpesialController extends Controller
 
     public function edit($id)
     {
-        return view('kelas.edit',
+        return view('spesialis.edit',
             [
                 'title' =>'edit nama kelas',
                 "spesial" => Spesial::findOrFail($id)
@@ -62,14 +62,12 @@ class SpesialController extends Controller
 
     public function update(Request $req, $id)
     {
-        // Validation rules
         $validateData = $req->validate([
             'nama' => 'required',
         ]);
 
         // Find the student by ID
         $kelas = Spesial::findOrFail($id);
-        //digunakan untuk memperbarui record dalam database
         $kelas->update($validateData);
         return redirect('spesial/all')->with('success', 'Data Anda berhasil diupdate');
     }
